@@ -1,0 +1,8 @@
+services:
+  comp-arch:
+    image: ubuntu:24.04
+    container_name: lab-2
+    # Place a folder with files to this directory
+    volumes:
+      - ${PWD}:/workspace
+    command: bash -c "apt-get update && apt-get install -y git vim vim-gtk3 tree curl ninja-build cmake g++ && tail -f /dev/null"
