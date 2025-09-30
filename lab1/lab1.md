@@ -1,0 +1,141 @@
+# Лабораторна робота №1
+
+## Завдання 1.1
+
+### Відпрацьовані команди
+
+```sh
+    1  uname -srvmo && hostname
+    2  sudo apt update && sudo apt upgrade -y
+    3  cat /etc/apt/sources.list.d/*.list
+    4  sudo apt install -y vim
+    5  cd ~
+    6  cd ~/Downloads
+    7  man ls
+    8  ls -l
+    9  dpkg -i package.deb
+   10  sudo !!
+   11  cd /
+   12  sudo su
+   13  exit
+   14  echo "hi all"
+   15  echo "$PWD hi all here!"
+   16  touch hi.sh
+   17  echo "$PATH"
+   18  vi hi.sh
+   19  ./hi.sh
+   20  chmod a+x hi.sh
+   21  chmod a+rwx hi.sh
+   22  ./hi.sh
+   23  ./hi.sh Ukraine
+   24  cp hi.sh scripts/
+   25  cp scripts/ ~/Documents/
+   26  cp -r scripts/ ~/Documents/
+   27  cd scripts
+   28  mv hi.sh ../
+   29  cd ..
+   30  rm scripts
+   31  rm -rf scripts
+   32  cd /bin
+   33  ls -l
+   34  cd ../..
+   35  tar -cvf scripts.tar scripts/
+   36  cat /etc/passwd
+   37  cat /var/log/syslog
+   38  tail -n 20 /var/log/syslog
+   39  grep -i "error" /var/log/syslog
+   40  cd /
+   41  find . -name "dhcp"
+   42  find . -iname "*dhcp*"
+   43  grep -i -r "dhcp" .
+   44  grep -i -r "etc" .
+   45  ping -c 4 google.com
+   46  (ping google.com &) && date >> ping.log
+   47  sudo ping -c 4 google.com
+   48  vlc
+   49  ls -l
+   50  cd /bin
+   51  ls
+   52  echo "$PATH"
+   53  printenv
+   54  whoami
+   55  cd /etc
+   56  ls -l
+   57  cd ..
+   58  cd lib
+   59  ls -l
+   60  dmesg
+   61  sudo !!
+   62  ls -l /dev
+   63  sudo dmesg -C
+   64  dmesg | tail -n 20
+   65  df -h
+   66  cd /home
+   67  ls -l
+   68  lsmod
+   69  cd /proc
+   70  cat cpuinfo
+   71  echo 1 > /proc/sys/net/ipv4/ip_forward
+   72  sudo su
+   73  ip addr show
+   74  ip link show
+   75  cd ~
+   76  echo "vika" > 1.txt
+   77  cat 1.txt
+   78  echo "vasya" > 2.txt
+   79  cat 2.txt
+   80  diff 1.txt 2.txt
+   81  history
+   82  lspci
+   83  history > history.txt
+```
+
+### Результат
+
+![alt text](Screenshot_20250917_112745.png)
+
+## Завдання 1.2
+
+### Скрипт
+
+```sh
+#!/usr/bin/env bash
+
+# Перевірка кількості параметрів
+if [[ $# -ne 2 ]]; then
+    echo "Використання: $0 <число1> <число2>"
+    exit 1
+fi
+
+# Числові параметри
+a=$1
+b=$2
+
+# Функція для виведення розміру файлу скрипта
+show_script_size() {
+    # ${BASH_SOURCE[0]} – шлях до поточного скрипта
+    local script_path="${BASH_SOURCE[0]}"
+    if [[ -f "$script_path" ]]; then
+        local size
+        size=$(stat -c%s "$script_path" 2>/dev/null || stat -f%z "$script_path")
+        echo "Розмір скрипта \"$script_path\": $size байт"
+    else
+        echo "Не вдалося визначити розмір скрипта."
+    fi
+}
+
+# Порівняння параметрів
+if (( a > b )); then
+    echo "Перший параметр ($a) більше другого ($b)."
+    echo "Список псевдонімів (alias) у вашій системі:"
+    alias
+else
+    echo "Перший параметр ($a) НЕ більше другого ($b)."
+    show_script_size
+fi
+
+```
+
+### Результат
+
+![alt text](Screenshot_20250917_122019.png)
