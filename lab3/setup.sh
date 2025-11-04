@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ -f /workspace/.setup_done ]; then
+    echo "Setup already done. Launching bash..."
+    exec bash
+fi
+
 apt-get update
 apt-get install -y \
     git \
@@ -95,6 +100,7 @@ git checkout 1_31_stable
 
 
 
+touch /workspace/.setup_done
 cd /workspace/repos
 
 exec bash

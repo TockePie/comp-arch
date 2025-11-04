@@ -1,0 +1,13 @@
+services:
+  lab4:
+    image: ubuntu:24.04
+    container_name: lab4
+    tty: true
+    stdin_open: true
+    privileged: true
+    environment:
+      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    entrypoint: ["/workspace/setup.sh"]
